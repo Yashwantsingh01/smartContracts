@@ -8,8 +8,6 @@ pragma solidity 0.8.8;
 // Source: https://docs.chain.link/data-feeds/using-data-feeds/
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
-
-
 contract FundMe{
 
     // payable keyword makes the function payable with ethereum or any other currency.
@@ -25,7 +23,6 @@ contract FundMe{
          * computation is done before required, it will cost GAS, but the calculation will be reverted on failure
          */
         require(getEthAmountInUsd(msg.value) > minimumUsd, "Please send minimum 1 ETH");  // 1e18 = 1 times 10 to the power 18 WEI
-
     }
 
     // Reference for data feeds: https://docs.chain.link/data-feeds/using-data-feeds
@@ -39,7 +36,6 @@ contract FundMe{
         (,int256 price,,,) = priceFeed.latestRoundData();
         // ETH in terms of USD
         return uint256(price*1e10);
-
     }
 
     function getVersion() public view returns(uint)
@@ -55,7 +51,5 @@ contract FundMe{
         // 1 ETH = 3000_000000000000000000 USD
         uint ethAmountToUsd = (ethPrice*_ethAmount)/1e18;
         return ethAmountToUsd;
-
     }
-
 }
